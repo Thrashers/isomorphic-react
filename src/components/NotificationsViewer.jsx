@@ -1,35 +1,38 @@
-import React from 'react';
-import NotificationsService from '../services/NotificationsService';
+import React from "react";
+import NotificationsService from "../services/NotificationsService";
 
+// TODO: Try react stateful component with react hooks and then test it.
 export default class NotificationsViewer extends React.Component {
   constructor(...args) {
     super(...args);
 
     this.state = {
-      count: -1
-    }
+      count: -1,
+    };
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     let { count } = await NotificationsService.GetNotifications();
-    console.log('componentDidMount count:', count);
+    console.log("componentDidMount count:", count);
 
     this.setState({
-      count
+      count,
     });
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate count:', this.state.count);
+    console.log("componentDidUpdate count:", this.state.count);
   }
 
   render() {
     return (
       <div className="mt-3 mb-2">
         <div className="notifications">
-          {this.state.count != -1 ? `${this.state.count} Notifications Awaiting` : `Loading...`}
+          {this.state.count != -1
+            ? `${this.state.count} Notifications Awaiting`
+            : `Loading...`}
         </div>
       </div>
-    )
+    );
   }
 }
